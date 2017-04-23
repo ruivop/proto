@@ -102,5 +102,4 @@ function getEventsCreatedByUser($username){
 	}
     return $stmt->fetchAll();
   }
-
 ?>

@@ -137,17 +137,19 @@ CREATE TABLE public.Meta_Event
 	meta_event_id serial PRIMARY KEY,
 	name varchar(100) NOT NULL,
 	description varchar(20000) NOT NULL,
-	recurrence recurrence,
-	meta_event_state boolean,
+	recurrence recurrence NOT NULL,
+	meta_event_state boolean NOT NULL,
   photo_url varchar(500),
 	expiration_date timestamp,
-	free boolean,
-	public boolean,
+	free boolean NOT NULL,
+	public boolean NOT NULL,
 	owner_id integer NOT NULL,
 	category_id integer NOT NULL,
 	local_id integer NOT NULL,
 	FOREIGN KEY(owner_id) REFERENCES Authenticated_User(user_id),
-	FOREIGN KEY(category_id) REFERENCES Category(category_id)
+	FOREIGN KEY(category_id) REFERENCES Category(category_id),
+	FOREIGN KEY(local_id) REFERENCES Localization(local_id),
+	CONSTRAINT expiration_date CHECK (expiration_date > current_date)
 );
 
 /*TODO: fazer trigger para quando se adiciona um evento verificar o tipo de meta_event */
@@ -160,12 +162,14 @@ CREATE TABLE public.Event
 	ending_date timestamp,
   event_state boolean NOT NULL,
 	photo_url varchar(1000),
-	free boolean,
-  public boolean,
+	free boolean NOT NULL,
+  public boolean NOT NULL,
 	meta_event_id integer NOT NULL,
 	local_id integer NOT NULL,
 	FOREIGN KEY(meta_event_id) REFERENCES Meta_Event(meta_event_id),
-	FOREIGN KEY(local_id) REFERENCES Localization(local_id)
+	FOREIGN KEY(local_id) REFERENCES Localization(local_id),
+	CONSTRAINT beginning_date CHECK (beginning_date > current_date),
+	CONSTRAINT end_date CHECK (ending_date > beginning_date)
 );
 
 CREATE TABLE public.Event_Content
