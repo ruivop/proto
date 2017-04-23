@@ -142,4 +142,5 @@
 							' LIMIT 10 OFFSET ? * 10;');
     $stmt->execute(array($param, $param, $param, $page));
     return $stmt->fetchAll();
+	}
 ?>
