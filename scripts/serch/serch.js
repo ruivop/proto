@@ -25,7 +25,7 @@ function addeventChange() {
 		askedToUpdate = true;
 		testCanUpdate();
 	});
-	$('form .serch').removeAttr("action");
+	$('.serch').removeAttr("action");
 }
 
 function addorderlisteners() {
