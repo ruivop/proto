@@ -31,7 +31,7 @@
     unset($_SESSION['form_values']);*/
 
 
-  session_set_cookie_params(3600, '/~lbaw1622/FEUP-LBAW/');
+  session_set_cookie_params(3600, '/~lbaw1622/proto/');
   session_start();
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
